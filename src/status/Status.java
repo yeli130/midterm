@@ -16,18 +16,35 @@ import java.util.Scanner;
  * then print the status details. 
  * @author srinivsi 
  */
-public class Status {
+
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
-    {
-    Scanner in =new Scanner(System.in);
-    System.out.println("Enter the user status code (zero,one,two,three) in string");
-    String code = in.next();
-    StausUser t= new StausUser();
-    t.statusDetail(code); 
+    public enum Status {
+    ZERO("REJECTED"),
+    ONE("PENDING"),
+    TWO("PROCESSING"),
+    THREE("APPROVED");
+
+    private final String description;
+
+    private Status(String description) {
+        this.description = description;
     }
-    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public static Status fromCode(String code) {
+        try {
+            return Status.valueOf(code.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
 }
+  
+    
+
